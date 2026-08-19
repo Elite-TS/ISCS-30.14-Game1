@@ -1,9 +1,16 @@
 extends CharacterBody2D
 
-const tile_size: Vector2 = Vector2(16, 16)
+const tile_size: Vector2 = Vector2(16, 16) # Specific size of a tile in pixels
 var sprite_node_pos_tween: Tween
 
-func _physics_process(delta: float) -> void:
+# Note for future coders: 
+# The RayCast2D children of Character are used for impassible objects
+# Once they collide with something in a certain direction, the player
+# shouldn't move in that direction (I think).
+
+func _physics_process(_delta: float) -> void:
+	# Code for the tile movement
+	# Each if-else does the movement + the animation
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
 		if Input.is_action_pressed("ui_up") and !$Up.is_colliding():
 			$AnimatedSprite2D.play("walk_up")
@@ -20,11 +27,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			$AnimatedSprite2D.play("idle")
 
-
-func _move(dir: Vector2):
+# The function used in the physics process
+func _move(dir: Vector2) -> void:
+	# Moves the object
 	global_position += dir * tile_size
 	$AnimatedSprite2D.global_position -= dir * tile_size
 	
+	# Makes the movement animation smooth
 	if sprite_node_pos_tween:
 		sprite_node_pos_tween.kill()
 	sprite_node_pos_tween = create_tween()
