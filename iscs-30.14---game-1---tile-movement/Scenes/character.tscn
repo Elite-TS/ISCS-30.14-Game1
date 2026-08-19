@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3i4ycfvm23kf"]
 
-[ext_resource type="Script" uid="uid://dhhfjsckadt5g" path="res://Scenes/character.gd" id="1_awmhf"]
+[ext_resource type="Script" uid="uid://dhhfjsckadt5g" path="res://Scripts/character.gd" id="1_awmhf"]
 [ext_resource type="Texture2D" uid="uid://b6ox8mt5b5gei" path="res://Assets/Temporary/Game1-TEMP-Non-Resized-Player Sprite Sheet.png" id="2_4klk2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6sok6"]
