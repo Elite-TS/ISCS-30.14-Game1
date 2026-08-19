@@ -49,8 +49,12 @@ script = ExtResource("1_awmhf")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sd078")
 animation = &"idle"
+autoplay = "idle"
 frame = 1
 frame_progress = 0.99539006
+
+[node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D" unique_id=231005298]
+zoom = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1300067110]
 shape = SubResource("RectangleShape2D_lgex6")

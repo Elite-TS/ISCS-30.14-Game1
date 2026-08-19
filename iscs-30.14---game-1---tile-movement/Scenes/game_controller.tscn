@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://cojmxnw53482m"]
 
 [ext_resource type="PackedScene" uid="uid://c3i4ycfvm23kf" path="res://Scenes/character.tscn" id="1_nqxm2"]
+[ext_resource type="PackedScene" uid="uid://fgarcg64k02i" path="res://Scenes/ground.tscn" id="2_kx2cw"]
 
 [node name="GameController" type="Node2D" unique_id=775248373]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=526544487]
-zoom = Vector2(5, 5)
-
 [node name="Character" parent="." unique_id=1794925823 instance=ExtResource("1_nqxm2")]
+z_index = 1
+position = Vector2(39, 120)
+
+[node name="Ground" parent="." unique_id=1588096314 instance=ExtResource("2_kx2cw")]
+texture_filter = 1
