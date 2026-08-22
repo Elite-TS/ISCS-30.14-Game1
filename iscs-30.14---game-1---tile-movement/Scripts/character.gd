@@ -62,27 +62,30 @@ func _move(dir: Vector2) -> void:
 	sprite_node_pos_tween.tween_property($AnimatedSprite2D, "global_position", global_position, 0.185).set_trans(Tween.TRANS_SINE)
 
 func _is_on_ice():
+	#gets and checks for the tile map
 	var tile_map = get_node_or_null("../Ground/Layer0") as TileMapLayer
 	if not tile_map:
 		return false
 		
-	#converts character global position to position relative to the tile map
-	var character_map_position = tile_map.to_local(global_position)
+	#converts global position to tile map local space
+	var tile_map_position = tile_map.to_local(global_position)
 	#converts pixel position to grid/tile structure
-	var character_coordinates = tile_map.local_to_map(character_map_position)
+	var tile_coordinates = tile_map.local_to_map(tile_map_position)
 	#gets tile data and checks if there is actually a tile
-	var tile_data = tile_map.get_cell_tile_data(character_coordinates)
+	var tile_data = tile_map.get_cell_tile_data(tile_coordinates)
 	
 	if tile_data:
 		#check if tile is an ice tile
 		return tile_data.get_custom_data("is_ice") == true
 		
 	return false
-			
+
+#forces the characters to move towards the its last direction upon entering ice tile
 func _on_ice_movement() -> void:
 	if _can_move(last_direction):
 		_move(last_direction)
-		
+
+#checks if character can move
 func _can_move(dir: Vector2) -> bool:
 	match dir:
 		Vector2.UP: return not $Up.is_colliding()
