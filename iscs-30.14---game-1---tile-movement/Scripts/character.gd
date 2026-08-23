@@ -1,12 +1,9 @@
 extends CharacterBody2D
 
-@export var accelerationValue = 0.05
-@export var slideValue = 0.05
-@export var fullStopValue = 15
-
 const tile_size: Vector2 = Vector2(16, 16) # Specific size of a tile in pixels
 var sprite_node_pos_tween: Tween
 var last_direction: Vector2 = Vector2.UP
+var current_direction: Vector2 = Vector2.UP
 
 # Note for future coders: 
 # The RayCast2D children of Character are used for impassible objects
@@ -23,6 +20,10 @@ func _physics_process(_delta: float) -> void:
 	# If standing on ice, automatically force a step in last_dir
 	if _is_on_ice() and last_direction != Vector2.ZERO:
 		_on_ice_movement()
+		return
+	
+	if _is_on_conveyor():
+		_on_conveyor_movement(current_direction)
 		return
 	
 	# Each if-else does the movement + the animation
@@ -45,8 +46,6 @@ func _physics_process(_delta: float) -> void:
 			_move(Vector2(1,0))
 		else:
 			$AnimatedSprite2D.play("idle")
-			
-	_is_on_ice()
 
 # The function used in the physics process
 func _move(dir: Vector2) -> void:
@@ -84,6 +83,45 @@ func _is_on_ice():
 func _on_ice_movement() -> void:
 	if _can_move(last_direction):
 		_move(last_direction)
+
+func _is_on_conveyor():
+	var tile_map = get_node_or_null("../Ground/Layer0") as TileMapLayer
+	if not tile_map:
+		return false
+		
+	#converts global position to tile map local space
+	var tile_map_position = tile_map.to_local(global_position)
+	#converts pixel position to grid/tile structure
+	var tile_coordinates = tile_map.local_to_map(tile_map_position)
+	#gets tile data and checks if there is actually a tile
+	var tile_data = tile_map.get_cell_tile_data(tile_coordinates)
+	
+	if tile_data:
+		#check if tile is an ice tile
+		if tile_data.get_custom_data("is_up"):
+			current_direction = Vector2.UP
+		if tile_data.get_custom_data("is_down"):
+			current_direction = Vector2.DOWN
+		if tile_data.get_custom_data("is_left"):
+			current_direction = Vector2.LEFT
+		if tile_data.get_custom_data("is_right"):
+			current_direction = Vector2.RIGHT
+		return tile_data.get_custom_data("is_conveyor") == true
+		
+	return false
+
+func _on_conveyor_movement(dir: Vector2) -> void:
+	if dir == Vector2.UP:
+		$AnimatedSprite2D.play("walk_up")
+	elif dir == Vector2.DOWN:
+		$AnimatedSprite2D.play("walk_down")
+	elif dir == Vector2.LEFT:
+		$AnimatedSprite2D.play("walk_left")
+	elif dir == Vector2.RIGHT:
+		$AnimatedSprite2D.play("walk_right")
+	
+	if _can_move(dir):
+		_move(dir)
 
 #checks if character can move
 func _can_move(dir: Vector2) -> bool:
