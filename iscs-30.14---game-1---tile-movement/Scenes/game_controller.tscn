@@ -9,5 +9,5 @@
 z_index = 1
 position = Vector2(39, 120)
 
-[node name="Ground" parent="." unique_id=1588096314 instance=ExtResource("2_kx2cw")]
+[node name="Level" parent="." unique_id=1588096314 instance=ExtResource("2_kx2cw")]
 texture_filter = 1

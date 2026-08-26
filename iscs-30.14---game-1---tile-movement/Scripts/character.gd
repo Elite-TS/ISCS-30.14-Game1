@@ -62,7 +62,7 @@ func _move(dir: Vector2) -> void:
 
 func _is_on_ice():
 	#gets and checks for the tile map
-	var tile_map = get_node_or_null("../Ground/Layer0") as TileMapLayer
+	var tile_map = get_node_or_null("../Level/Ground") as TileMapLayer
 	if not tile_map:
 		return false
 		
@@ -88,8 +88,9 @@ func _on_ice_movement() -> void:
 		last_direction = Vector2.ZERO
 
 func _is_on_conveyor():
-	var tile_map = get_node_or_null("../Ground/Layer0") as TileMapLayer
+	var tile_map = get_node_or_null("../Level/Map Objects") as TileMapLayer
 	if not tile_map:
+		print("Not conveyer")
 		return false
 		
 	#converts global position to tile map local space
