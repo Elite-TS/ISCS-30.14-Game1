@@ -117,12 +117,16 @@ func _is_on_conveyor():
 func _on_conveyor_movement(dir: Vector2) -> void:
 	if dir == Vector2.UP:
 		$AnimatedSprite2D.play("walk_up")
+		last_direction = Vector2.UP
 	elif dir == Vector2.DOWN:
 		$AnimatedSprite2D.play("walk_down")
+		last_direction = Vector2.DOWN
 	elif dir == Vector2.LEFT:
 		$AnimatedSprite2D.play("walk_left")
+		last_direction = Vector2.LEFT
 	elif dir == Vector2.RIGHT:
 		$AnimatedSprite2D.play("walk_right")
+		last_direction = Vector2.RIGHT
 	
 	if _can_move(dir):
 		_move(dir)
