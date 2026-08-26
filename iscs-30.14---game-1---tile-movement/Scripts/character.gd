@@ -83,6 +83,9 @@ func _is_on_ice():
 func _on_ice_movement() -> void:
 	if _can_move(last_direction):
 		_move(last_direction)
+	else:
+		$AnimatedSprite2D.play("idle")
+		last_direction = Vector2.ZERO
 
 func _is_on_conveyor():
 	var tile_map = get_node_or_null("../Ground/Layer0") as TileMapLayer
@@ -126,8 +129,16 @@ func _on_conveyor_movement(dir: Vector2) -> void:
 #checks if character can move
 func _can_move(dir: Vector2) -> bool:
 	match dir:
-		Vector2.UP: return not $Up.is_colliding()
-		Vector2.DOWN: return not $Down.is_colliding()
-		Vector2.LEFT: return not $Left.is_colliding()
-		Vector2.RIGHT: return not $Right.is_colliding()
+		Vector2.UP: 
+			print(not $Up.is_colliding())
+			return not $Up.is_colliding()
+		Vector2.DOWN: 
+			print(not $Down.is_colliding())
+			return not $Down.is_colliding()
+		Vector2.LEFT: 
+			print(not $Left.is_colliding())
+			return not $Left.is_colliding()
+		Vector2.RIGHT: 
+			print(not $Right.is_colliding())
+			return not $Right.is_colliding()
 	return false
