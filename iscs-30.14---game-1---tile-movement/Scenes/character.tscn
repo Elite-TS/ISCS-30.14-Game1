@@ -20,6 +20,18 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("2_4klk2")
 region = Rect2(48, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw3qc"]
+atlas = ExtResource("3_owm7s")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtvxd"]
+atlas = ExtResource("3_owm7s")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g2gg"]
+atlas = ExtResource("3_owm7s")
+region = Rect2(0, 32, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ushfy"]
 atlas = ExtResource("2_4klk2")
 region = Rect2(0, 16, 16, 16)
@@ -116,8 +128,32 @@ animations = [{
 "texture": SubResource("AtlasTexture_r4sta")
 }],
 "loop": 1,
-"name": &"idle",
+"name": &"idle_down",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw3qc")
+}],
+"loop": 1,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtvxd")
+}],
+"loop": 1,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g2gg")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -209,7 +245,7 @@ script = ExtResource("1_awmhf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1258420445]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sd078")
-animation = &"walk_left"
+animation = &"idle_down"
 
 [node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D" unique_id=231005298]
 zoom = Vector2(5, 5)
