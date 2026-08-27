@@ -29,29 +29,37 @@ func _physics_process(_delta: float) -> void:
 	# Each if-else does the movement + the animation
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
 		if Input.is_action_pressed("ui_up"):
-			$AnimatedSprite2D.play("idle_up")
+			last_direction = Vector2.UP
 			if _can_move(Vector2.UP):
 				$AnimatedSprite2D.play("walk_up")
-				last_direction = Vector2.UP
 				_move(Vector2(0,-1))
 		elif Input.is_action_pressed("ui_down"):
-			$AnimatedSprite2D.play("idle_down")
+			last_direction = Vector2.DOWN
 			if _can_move(Vector2.DOWN):
 				$AnimatedSprite2D.play("walk_down")
-				last_direction = Vector2.DOWN
 				_move(Vector2(0,1))
 		elif Input.is_action_pressed("ui_left"):
-			$AnimatedSprite2D.play("idle_left")
+			last_direction = Vector2.LEFT
 			if _can_move(Vector2.LEFT):
 				$AnimatedSprite2D.play("walk_left")
-				last_direction = Vector2.LEFT
 				_move(Vector2(-1,0))
 		elif Input.is_action_pressed("ui_right"):
-			$AnimatedSprite2D.play("idle_right")
+			last_direction = Vector2.RIGHT
 			if _can_move(Vector2.RIGHT):
 				$AnimatedSprite2D.play("walk_right")
-				last_direction = Vector2.RIGHT
 				_move(Vector2(1,0))
+		else:
+			_play_idle()
+
+func _play_idle() -> void:
+	if last_direction == Vector2.UP:
+		$AnimatedSprite2D.play("idle_up")
+	elif last_direction == Vector2.DOWN:
+		$AnimatedSprite2D.play("idle_down")
+	elif last_direction == Vector2.LEFT:
+		$AnimatedSprite2D.play("idle_left")
+	elif last_direction == Vector2.RIGHT:
+		$AnimatedSprite2D.play("idle_right")
 
 # The function used in the physics process
 func _move(dir: Vector2) -> void:
@@ -90,7 +98,7 @@ func _on_ice_movement() -> void:
 	if _can_move(last_direction):
 		_move(last_direction)
 	else:
-		$AnimatedSprite2D.play("idle_down")
+		_play_idle()
 		last_direction = Vector2.ZERO
 
 func _is_on_conveyor():
