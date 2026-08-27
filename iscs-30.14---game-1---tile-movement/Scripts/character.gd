@@ -26,6 +26,10 @@ func _physics_process(_delta: float) -> void:
 		_on_conveyor_movement(current_direction)
 		return
 	
+	if _is_on_warp():
+		_on_warp()
+		return
+	
 	# Each if-else does the movement + the animation
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
 		if Input.is_action_pressed("ui_up"):
@@ -51,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			_play_idle()
 
+# Calculates which idle animation to play
 func _play_idle() -> void:
 	if last_direction == Vector2.UP:
 		$AnimatedSprite2D.play("idle_up")
@@ -161,3 +166,28 @@ func _can_move(dir: Vector2) -> bool:
 			print(not $Right.is_colliding())
 			return not $Right.is_colliding()
 	return false
+
+func _is_on_warp():
+	#gets and checks for the tile map
+	var tile_map = get_node_or_null("../Level/Ground") as TileMapLayer
+	if not tile_map:
+		return false
+		
+	#converts global position to tile map local space
+	var tile_map_position = tile_map.to_local(global_position)
+	#converts pixel position to grid/tile structure
+	var tile_coordinates = tile_map.local_to_map(tile_map_position)
+	#gets tile data and checks if there is actually a tile
+	var tile_data = tile_map.get_cell_tile_data(tile_coordinates)
+	
+	if tile_data:
+		#check if tile is a warp tile
+		return tile_data.get_custom_data("is_warp") == true
+		
+	return false
+
+# Warps to the next level
+func _on_warp() -> void:
+	var warp_distance = 16*28
+	var right_vector = Vector2.RIGHT
+	global_position += right_vector * warp_distance
