@@ -17,19 +17,19 @@ func _physics_process(_delta: float) -> void:
 	# check to see if the player is present in the opposite side of the
 	# input. If the player is there, the crate moves.
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
-		if Input.is_action_just_pressed("ui_up") and _can_move(Vector2.UP):
+		if Input.is_action_just_pressed("input_up") and _can_move(Vector2.UP):
 			player_collide_checker = $Down.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(0,-1))
-		elif Input.is_action_just_pressed("ui_down") and _can_move(Vector2.DOWN):
+		elif Input.is_action_just_pressed("input_down") and _can_move(Vector2.DOWN):
 			player_collide_checker = $Up.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(0,1))
-		elif Input.is_action_just_pressed("ui_left") and _can_move(Vector2.LEFT):
+		elif Input.is_action_just_pressed("input_left") and _can_move(Vector2.LEFT):
 			player_collide_checker = $Right.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(-1,0))
-		elif Input.is_action_just_pressed("ui_right") and _can_move(Vector2.RIGHT):
+		elif Input.is_action_just_pressed("input_right") and _can_move(Vector2.RIGHT):
 			player_collide_checker = $Left.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(1,0))
