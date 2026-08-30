@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://xi3aavqh2n1n"]
+
+[ext_resource type="Script" uid="uid://0widw7lc7m3w" path="res://Scripts/crate.gd" id="1_i4r3v"]
+[ext_resource type="Texture2D" uid="uid://cmxtwi7j58v6m" path="res://Assets/Temporary/Game1-Gimmicks-SpriteSheet.png" id="1_wp72f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4r3v"]
+atlas = ExtResource("1_wp72f")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sd078"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4r3v")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgex6"]
+size = Vector2(16, 16)
+
+[node name="Crate" type="CharacterBody2D" unique_id=1691252567]
+script = ExtResource("1_i4r3v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=201627603]
+sprite_frames = SubResource("SpriteFrames_sd078")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=416002426]
+shape = SubResource("RectangleShape2D_lgex6")
+
+[node name="Down" type="RayCast2D" parent="." unique_id=1684703011]
+target_position = Vector2(0, 13)
+
+[node name="Up" type="RayCast2D" parent="." unique_id=1239842171]
+target_position = Vector2(0, -13)
+
+[node name="Right" type="RayCast2D" parent="." unique_id=355240657]
+target_position = Vector2(13, 0)
+
+[node name="Left" type="RayCast2D" parent="." unique_id=353936892]
+target_position = Vector2(-13, 0)

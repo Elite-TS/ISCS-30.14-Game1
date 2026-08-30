@@ -24,6 +24,10 @@ Fade="*uid://bxjf7xc6qweya"
 window/size/viewport_width=1024
 window/size/viewport_height=768
 
+[global_group]
+
+char="The player character"
+
 [input]
 
 input_up={

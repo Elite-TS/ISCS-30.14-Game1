@@ -239,7 +239,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgex6"]
 size = Vector2(8, 8)
 
-[node name="Character" type="CharacterBody2D" unique_id=1794925823]
+[node name="Character" type="CharacterBody2D" unique_id=1794925823 groups=["char"]]
 script = ExtResource("1_awmhf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1258420445]
