@@ -177,17 +177,13 @@ func _on_conveyor_movement(dir: Vector2) -> void:
 #checks if character can move
 func _can_move(dir: Vector2) -> bool:
 	match dir:
-		Vector2.UP: 
-			print(not $Up.is_colliding())
+		Vector2.UP:
 			return not $Up.is_colliding()
-		Vector2.DOWN: 
-			print(not $Down.is_colliding())
+		Vector2.DOWN:
 			return not $Down.is_colliding()
-		Vector2.LEFT: 
-			print(not $Left.is_colliding())
+		Vector2.LEFT:
 			return not $Left.is_colliding()
-		Vector2.RIGHT: 
-			print(not $Right.is_colliding())
+		Vector2.RIGHT:
 			return not $Right.is_colliding()
 	return false
 
