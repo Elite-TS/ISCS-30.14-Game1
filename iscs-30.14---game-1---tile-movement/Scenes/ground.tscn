@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bgn6p10q4puh2" path="res://Assets/Imported/TileMap-roguelikeDungeon_transparent.png" id="4_kv0ry"]
 [ext_resource type="Texture2D" uid="uid://mipj3q1d7d5d" path="res://Assets/Temporary/Sprite sheet for Basic Pack.png" id="4_s6h8e"]
 [ext_resource type="Texture2D" uid="uid://1dpkiecefwy4" path="res://Assets/Temporary/Game1-AnimatedConveyerTiles-SpriteSheet.png" id="6_ribny"]
+[ext_resource type="Texture2D" uid="uid://cmxtwi7j58v6m" path="res://Assets/Temporary/Game1-Gimmicks-SpriteSheet.png" id="7_rjkga"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjp1w"]
 texture = ExtResource("1_688p1")
@@ -778,6 +779,11 @@ separation = Vector2i(1, 1)
 19:15/0 = 0
 19:15/0/custom_data_6 = true
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2r5v0"]
+texture = ExtResource("7_rjkga")
+0:0/0 = 0
+1:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_1u5gw"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
@@ -809,6 +815,7 @@ sources/2 = SubResource("TileSetAtlasSource_gxb06")
 sources/4 = SubResource("TileSetAtlasSource_p0cfx")
 sources/5 = SubResource("TileSetAtlasSource_2xbik")
 sources/10 = SubResource("TileSetAtlasSource_1u5gw")
+sources/6 = SubResource("TileSetAtlasSource_2r5v0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02qk3"]
 texture = ExtResource("1_688p1")
@@ -1410,6 +1417,11 @@ texture = ExtResource("3_02qk3")
 3:41/0 = 0
 4:41/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2xhn"]
+texture = ExtResource("7_rjkga")
+0:0/0 = 0
+1:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ribny"]
 texture = ExtResource("4_s6h8e")
 17:0/0 = 0
@@ -1577,6 +1589,7 @@ sources/1 = SubResource("TileSetAtlasSource_s6h8e")
 sources/2 = SubResource("TileSetAtlasSource_kv0ry")
 sources/4 = SubResource("TileSetAtlasSource_ribny")
 sources/5 = SubResource("TileSetAtlasSource_rjkga")
+sources/3 = SubResource("TileSetAtlasSource_o2xhn")
 
 [node name="Level" type="Node2D" unique_id=1135914897]
 
@@ -1587,7 +1600,7 @@ tile_set = SubResource("TileSet_1u5gw")
 
 [node name="Map Objects" type="TileMapLayer" parent="." unique_id=2031882321]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAABAAoABQAAAAEAAAABAAkABQACAAEAAAAIAAcABQAAAAEAAAAFAAEABQAAAAEAAAAHAAEABQAAAAEAAAAFAAIABQACAAEAAAAGAAEABQACAAEAAAAGAAIABQABAAEAAAAPAAoABQAAAAEAAAAQAAoABQABAAEAAAARAAUABQABAAEAAAAQAAYABQACAAEAAAARAAYABQAAAAEAAAAOAAMABQAAAAEAAAAOAAIABQABAAEAAAAWAAEABQAAAAEAAAAXAAEABQABAAEAAAAYAAEABQACAAEAAAAgAAYABQACAAEAAAAdAAUABQAAAAEAAAAcAAUABQABAAEAAAAeAAMABQACAAEAAAAfAAMABQABAAEAAAAfAAIABQAAAAEAAAAgAAIABQAAAAEAAAAdAAAABQAAAAEAAAAlAP7/BQAAAAEAAAAmAP7/BQAAAAEAAAAnAP7/BQABAAEAAAAnAP//BQAAAAEAAAAnAAAABQACAAEAAAAnAAEABQAAAAEAAAAmAAEABQAAAAEAAAAmAAIABQAAAAEAAAAlAAIABQAAAAEAAAAlAAEABQABAAEAAAAlAAAABQAAAAEAAAAmAAAABQABAAEAAAAmAP//BQACAAEAAAAlAP//BQAAAAEAAAAnAAIABQABAAEAAAAvAAUABQAUAA8AAABqAPz/BQAUAA8AAAA=")
+tile_map_data = PackedByteArray("AAABAAoABQAAAAEAAAABAAkABQACAAEAAAAIAAcABQAAAAEAAAAFAAEABQAAAAEAAAAHAAEABQAAAAEAAAAFAAIABQACAAEAAAAGAAEABQACAAEAAAAGAAIABQABAAEAAAAPAAoABQAAAAEAAAAQAAoABQABAAEAAAARAAUABQABAAEAAAAQAAYABQACAAEAAAARAAYABQAAAAEAAAAOAAMABQAAAAEAAAAOAAIABQABAAEAAAAWAAEABQAAAAEAAAAXAAEABQABAAEAAAAYAAEABQACAAEAAAAgAAYABQACAAEAAAAdAAUABQAAAAEAAAAcAAUABQABAAEAAAAeAAMABQACAAEAAAAfAAMABQABAAEAAAAfAAIABQAAAAEAAAAgAAIABQAAAAEAAAAdAAAABQAAAAEAAAAlAP7/BQAAAAEAAAAmAP7/BQAAAAEAAAAnAP7/BQABAAEAAAAnAP//BQAAAAEAAAAnAAAABQACAAEAAAAnAAEABQAAAAEAAAAmAAEABQAAAAEAAAAmAAIABQAAAAEAAAAlAAIABQAAAAEAAAAlAAEABQABAAEAAAAlAAAABQAAAAEAAAAmAAAABQABAAEAAAAmAP//BQACAAEAAAAlAP//BQAAAAEAAAAnAAIABQABAAEAAAAvAAUABQAUAA8AAABqAPz/BQAUAA8AAABhAAEAAwABAAAAAABhAP3/AwABAAAAAABRAPf/AwABAAAAAABQAP//AwABAAAAAAA=")
 tile_set = SubResource("TileSet_ribny")
 
 [node name="Lever1" type="TileMapLayer" parent="." unique_id=969653206]
