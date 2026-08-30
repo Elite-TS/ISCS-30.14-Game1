@@ -130,6 +130,7 @@ separation = Vector2i(1, 1)
 5:1/0 = 0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 22:11/0 = 0
+22:11/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 22:11/0/custom_data_7 = true
 20:15/0 = 0
 19:15/0 = 0
@@ -142,6 +143,8 @@ texture = ExtResource("7_rjkga")
 
 [sub_resource type="TileSet" id="TileSet_1u5gw"]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "ice"
 terrain_set_0/terrain_0/color = Color(0.3033504, 0.5775958, 0.8546587, 1)
@@ -268,12 +271,15 @@ separation = Vector2i(1, 1)
 5:1/0 = 0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 22:11/0 = 0
+22:11/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 22:11/0/custom_data_6 = true
 20:15/0 = 0
 19:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ribny"]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "ice"
 terrain_set_0/terrain_0/color = Color(0.3033504, 0.5775958, 0.8546587, 1)
@@ -317,12 +323,18 @@ tile_set = SubResource("TileSet_ribny")
 
 [node name="Crate1" parent="Lever1" unique_id=1691252567 instance=ExtResource("4_s6h8e")]
 position = Vector2(1288, -56)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Crate2" parent="Lever1" unique_id=1874388070 instance=ExtResource("4_s6h8e")]
 position = Vector2(1432, -24)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Crate3" parent="Lever1" unique_id=748894743 instance=ExtResource("4_s6h8e")]
 position = Vector2(1512, -56)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Lever2" type="TileMapLayer" parent="." unique_id=1801092039]
 use_parent_material = true
@@ -331,6 +343,8 @@ tile_set = SubResource("TileSet_ribny")
 
 [node name="Crate4" parent="Lever2" unique_id=417983634 instance=ExtResource("4_s6h8e")]
 position = Vector2(1480, -88)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Lever3" type="TileMapLayer" parent="." unique_id=968265725]
 use_parent_material = true

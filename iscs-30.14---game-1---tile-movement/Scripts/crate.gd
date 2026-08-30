@@ -17,19 +17,19 @@ func _physics_process(_delta: float) -> void:
 	# check to see if the player is present in the opposite side of the
 	# input. If the player is there, the crate moves.
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
-		if Input.is_action_just_pressed("ui_up") and !$Up.is_colliding():
+		if Input.is_action_just_pressed("ui_up") and _can_move(Vector2.UP):
 			player_collide_checker = $Down.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(0,-1))
-		elif Input.is_action_just_pressed("ui_down") and !$Down.is_colliding():
+		elif Input.is_action_just_pressed("ui_down") and _can_move(Vector2.DOWN):
 			player_collide_checker = $Up.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(0,1))
-		elif Input.is_action_just_pressed("ui_left") and !$Left.is_colliding():
+		elif Input.is_action_just_pressed("ui_left") and _can_move(Vector2.LEFT):
 			player_collide_checker = $Right.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(-1,0))
-		elif Input.is_action_just_pressed("ui_right") and !$Right.is_colliding():
+		elif Input.is_action_just_pressed("ui_right") and _can_move(Vector2.RIGHT):
 			player_collide_checker = $Left.get_collider()
 			if player_collide_checker != null and player_collide_checker.is_in_group("char"):
 				_move(Vector2(1,0))
@@ -47,3 +47,15 @@ func _move(dir: Vector2) -> void:
 	sprite_node_pos_tween = create_tween()
 	sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	sprite_node_pos_tween.tween_property($AnimatedSprite2D, "global_position", global_position, 0.185).set_trans(Tween.TRANS_SINE)
+
+func _can_move(dir: Vector2) -> bool:
+	match dir:
+		Vector2.UP:
+			return not $Up.is_colliding()
+		Vector2.DOWN:
+			return not $Down.is_colliding()
+		Vector2.LEFT:
+			return not $Left.is_colliding()
+		Vector2.RIGHT:
+			return not $Right.is_colliding()
+	return false
