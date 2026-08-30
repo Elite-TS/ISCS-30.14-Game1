@@ -109,12 +109,7 @@ func _is_on_ice():
 	if not tile_map:
 		return false
 		
-	#converts global position to tile map local space
-	var tile_map_position = tile_map.to_local(global_position)
-	#converts pixel position to grid/tile structure
-	var tile_coordinates = tile_map.local_to_map(tile_map_position)
-	#gets tile data and checks if there is actually a tile
-	var tile_data = tile_map.get_cell_tile_data(tile_coordinates)
+	var tile_data = get_tile_data(tile_map)
 	
 	if tile_data:
 		#check if tile is an ice tile
@@ -136,12 +131,7 @@ func _is_on_conveyor():
 		print("Not conveyer")
 		return false
 		
-	#converts global position to tile map local space
-	var tile_map_position = tile_map.to_local(global_position)
-	#converts pixel position to grid/tile structure
-	var tile_coordinates = tile_map.local_to_map(tile_map_position)
-	#gets tile data and checks if there is actually a tile
-	var tile_data = tile_map.get_cell_tile_data(tile_coordinates)
+	var tile_data = get_tile_data(tile_map)
 	
 	if tile_data:
 		#check if tile is an ice tile
