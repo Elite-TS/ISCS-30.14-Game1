@@ -28,6 +28,10 @@ window/size/viewport_height=768
 
 char="The player character"
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 input_up={
