@@ -4,6 +4,7 @@ const tile_size: Vector2 = Vector2(16, 16) # Specific size of a tile in pixels
 var sprite_node_pos_tween: Tween
 var last_direction: Vector2 = Vector2.UP
 var current_direction: Vector2 = Vector2.UP
+var can_warp: bool = true
 var lever_locations: Array[Vector2] = [
 	Vector2(1560,24),Vector2(1288,-8),Vector2(1560,-40),Vector2(1304,-136)
 	]
@@ -15,9 +16,8 @@ var crate_starting_locations: Array[Vector2] = [
 ]
 var crates: Array[CharacterBody2D]
 
-#REMOVE ONCE DONE TESTING
 func _ready() -> void:
-	global_position=Vector2(1208,88)
+	global_position=Vector2(40,120)
 	var crate_1 = get_node("../Level/Lever1/Crate1")
 	var crate_2 = get_node("../Level/Lever1/Crate2")
 	var crate_3 = get_node("../Level/Lever1/Crate3")
@@ -46,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 		_on_conveyor_movement(current_direction)
 		return
 	
-	if _is_on_warp():
+	if _is_on_warp() and can_warp:
 		_on_warp()
 		return
 	
@@ -212,11 +212,13 @@ func _is_on_warp():
 
 # Warps to the next level
 func _on_warp() -> void:
+	can_warp = false
 	var warp_distance = 16*28
 	var right_vector = Vector2.RIGHT
 	await Fade.fade(1,0.5).finished
-	global_position=Vector2(1208,88)
+	global_position += right_vector * warp_distance
 	await Fade.fade(0,0.7).finished
+	can_warp = true
 
 func _is_on_chasm():
 	#gets and checks for the tile map
