@@ -59,3 +59,6 @@ func _can_move(dir: Vector2) -> bool:
 		Vector2.RIGHT:
 			return not $Right.is_colliding()
 	return false
+
+func force_place(location: Vector2):
+	global_position=location

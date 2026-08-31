@@ -5,12 +5,25 @@ var sprite_node_pos_tween: Tween
 var last_direction: Vector2 = Vector2.UP
 var current_direction: Vector2 = Vector2.UP
 var lever_locations: Array[Vector2] = [
-	Vector2(1559,24),Vector2(1287,-8),Vector2(1559,-40),Vector2(1303,-136)
+	Vector2(1560,24),Vector2(1288,-8),Vector2(1560,-40),Vector2(1304,-136)
 	]
+var lever_coordinates: Array[Vector2] = [
+	Vector2(97,1),Vector2(80,-1),Vector2(97,-3),Vector2(81,-9)
+	]
+var crate_starting_locations: Array[Vector2] = [
+	Vector2(1288,-56),Vector2(1432,-24),Vector2(1496,-56),Vector2(1480,-88)
+]
+var crates: Array[CharacterBody2D]
 
 #REMOVE ONCE DONE TESTING
 func _ready() -> void:
-	global_position=Vector2(1207,88)
+	global_position=Vector2(1208,88)
+	var crate_1 = get_node("../Level/Lever1/Crate1")
+	var crate_2 = get_node("../Level/Lever1/Crate2")
+	var crate_3 = get_node("../Level/Lever1/Crate3")
+	var crate_4 = get_node("../Level/Lever2/Crate4")
+	crates = [crate_1,crate_2,crate_3,crate_4]
+	
 	
 # Note for future coders: 
 # The RayCast2D children of Character are used for impassible objects
@@ -72,8 +85,10 @@ func _physics_process(_delta: float) -> void:
 				_move(Vector2(1,0))
 		elif Input.is_action_pressed("interact"):
 			if _is_on_lever()>0:
+				var objects = get_node_or_null("../Level/Map Objects") as TileMapLayer
 				var lever = get_node_or_null("../Level/Lever"+str(_is_on_lever())) as TileMapLayer
 				await Fade.fade(1,0.5).finished
+				objects.set_cell(lever_coordinates[_is_on_lever()-1],3,Vector2(0,0))
 				lever.enabled = false
 				await Fade.fade(0,0.7).finished
 		else:
@@ -128,7 +143,6 @@ func _on_ice_movement() -> void:
 func _is_on_conveyor():
 	var tile_map = get_node_or_null("../Level/Ground") as TileMapLayer
 	if not tile_map:
-		print("Not conveyer")
 		return false
 		
 	var tile_data = get_tile_data(tile_map)
@@ -201,7 +215,7 @@ func _on_warp() -> void:
 	var warp_distance = 16*28
 	var right_vector = Vector2.RIGHT
 	await Fade.fade(1,0.5).finished
-	global_position=Vector2(1207,88)
+	global_position=Vector2(1208,88)
 	await Fade.fade(0,0.7).finished
 
 func _is_on_chasm():
@@ -229,22 +243,26 @@ func _is_on_chasm():
 	if tile_data:
 		#check if tile is a chasm tile
 		return tile_data.get_custom_data("is_chasm") == true
-	print("NOT ON CHASM 2")
 	return false
 
 func _on_chasm():
-	print("IS ON CHASM")
 	await Fade.fade(1,0.5).finished
-	global_position=Vector2(1207,88)
+	global_position=Vector2(1208,88)
 	var lever1 = get_node_or_null("../Level/Lever1") as TileMapLayer
 	var lever2 = get_node_or_null("../Level/Lever2") as TileMapLayer
 	var lever3 = get_node_or_null("../Level/Lever3") as TileMapLayer
 	var lever4 = get_node_or_null("../Level/Lever4") as TileMapLayer
+	var objects = get_node_or_null("../Level/Map Objects") as TileMapLayer
 	lever1.enabled=true
 	lever2.enabled=true
 	lever3.enabled=true
 	lever4.enabled=true
-	#reset other tiles
+	for coord in lever_coordinates:
+		objects.set_cell(coord,3,Vector2(1,0))
+	var crate_no = 0
+	for crate in crates:
+		crate.force_place(crate_starting_locations[crate_no])
+		crate_no+=1
 	await Fade.fade(0,0.7).finished
 
 func _is_on_lever():
@@ -252,9 +270,7 @@ func _is_on_lever():
 	for coordinate in lever_locations:
 		loc_counter+=1
 		if global_position.is_equal_approx(coordinate):
-			print(loc_counter)
 			return loc_counter
-	print(0)
 	return 0
 
 func get_tile_data(tile_map):
