@@ -59,7 +59,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		get_node("AnimatedSprite2D/Camera2D/Label").visible = false
 	
-	print(str(global_position))
 	
 	# Each if-else does the movement + the animation
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
